@@ -1,0 +1,56 @@
+# You are given two classes, Person and Student, where Person is the base class and Student is the derived class. Completed code for Person and a declaration for Student are provided for you in the editor. Observe that Student inherits all the properties of Person.
+
+Complete the Student class by writing the following:
+A Student class constructor, which has 4 parameters:
+- A string, firstName
+- A string, lastName
+- An integer, id
+An integer array (or vector) of test scores, scores
+
+A char calculate() method that calculates a Student object's average and returns the grade character representative of their calculated average:
+A | 90-100
+B | 80-89
+C | 70-79
+D | 60-69
+F | <60
+
+# Step one create the two classes
+class Person:
+    def __init__(self,fname,lname):
+        self.fname = fname
+        self.lname = lname
+        
+# The only indentifiers Person are first and last name. Students have them and one more: student id.
+        
+class Student(Person):
+    def __init__(self, fname, lname, student_id):
+        self.id = int(student_id)
+        Person.__init__(self, fname, lname)
+        
+# Next part we need is gpa. But don't have that, we need to calculate it.
+        
+    def calculate(self,list):
+        points = 0
+        total = len(list)
+        
+        for num in list:
+            points = points + num
+            
+        gpa = points/total
+        
+        if gpa >= 90 and gpa <= 100:
+            print(self.fname + " " + self.lname + " " + "Student ID " + str(self.id) + ", you have an A.")
+        elif gpa >= 80 and gpa <= 89:
+            print(self.fname + " " + self.lname + " " + "Student ID " + str(self.id) + ", you have a B.")
+        elif gpa >= 70 and gpa <= 79:
+            print(self.fname + " " + self.lname + " " + "Student ID " + str(self.id) + ", you have a C.")
+        elif gpa >= 60 and gpa <= 69:
+            print(self.fname + " " + self.lname + " " + "Student ID " + str(self.id) + ", you have a D.")
+        elif gpa < 60:
+            print(self.fname + " " + self.lname + " " + "Student ID " + str(self.id) + ", you have an F.")
+            
+# Make a person that is also a student.
+person1 = Student(str(input("First name: ")),str(input("Last name: ")), int(input("Student ID: ")))
+grades = input("Enter a list grades separated by space: ")
+grades = list(map(int, grades.split()))
+person1.calculate(grades)
